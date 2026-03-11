@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gael Andre Hueytlelt Villalobos — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04050f; --bg2: #080c1a; --panel: #0b1020; --border: #1a2a5e;
+      --accent: #00f0ff; --accent2: #ff00aa; --accent3: #ffe600;
+      --text: #c8d8ff; --dim: #4a5a8a;
+      --pixel: 'Press Start 2P', monospace; --mono: 'Share Tech Mono', monospace;
+      --js:#F7DF1E; --sql:#e38c00; --gdscript:#478CBF; --react:#61DAFB;
+      --nodejs:#339933; --linux:#FCC624; --nginx:#009639; --godot:#478CBF;
+      --aws:#FF9900; --git:#F05032; --kotlin:#7F52FF; --android:#3DDC84;
+      --compose:#4285F4; --room:#3DDC84; --retrofit:#48b983; --hilt:#FF6F00; --socketio:#ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--mono); font-size:15px; line-height:1.7; overflow-x:hidden; cursor:crosshair; }
+
+    body::before {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0; animation:twinkle 6s infinite alternate;
+      background-image:
+              radial-gradient(1px 1px at 10% 20%,#fff 0%,transparent 100%),
+              radial-gradient(1px 1px at 35% 55%,rgba(255,255,255,.6) 0%,transparent 100%),
+              radial-gradient(1px 1px at 60% 10%,rgba(255,255,255,.8) 0%,transparent 100%),
+              radial-gradient(1px 1px at 80% 70%,#fff 0%,transparent 100%),
+              radial-gradient(1px 1px at 20% 80%,rgba(255,255,255,.5) 0%,transparent 100%),
+              radial-gradient(1px 1px at 90% 35%,rgba(255,255,255,.7) 0%,transparent 100%),
+              radial-gradient(1px 1px at 50% 90%,#fff 0%,transparent 100%),
+              radial-gradient(1px 1px at 75% 45%,rgba(255,255,255,.4) 0%,transparent 100%),
+              radial-gradient(1px 1px at 15% 60%,rgba(255,255,255,.6) 0%,transparent 100%),
+              radial-gradient(1px 1px at 55% 30%,#fff 0%,transparent 100%),
+              radial-gradient(1px 1px at 5%  45%,rgba(255,255,255,.5) 0%,transparent 100%),
+              radial-gradient(1px 1px at 95% 85%,rgba(255,255,255,.7) 0%,transparent 100%),
+              radial-gradient(1px 1px at 42% 72%,#fff 0%,transparent 100%),
+              radial-gradient(1px 1px at 67% 18%,rgba(255,255,255,.4) 0%,transparent 100%),
+              radial-gradient(1px 1px at 88% 52%,#fff 0%,transparent 100%);
+    }
+    @keyframes twinkle { 0%{opacity:.7} 100%{opacity:1} }
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px); }
+
+    .container { max-width:900px; margin:0 auto; padding:0 20px 80px; position:relative; z-index:1; }
+
+
+    .hud { font-family:var(--pixel); font-size:8px; color:var(--dim); display:flex; justify-content:space-between; padding:12px 0; margin-bottom:24px; border-bottom:1px solid var(--border); letter-spacing:1px; }
+    .hud-score { color:var(--accent3); }
+
+
+    header { text-align:center; padding:60px 0 40px; }
+    .invader-row { display:flex; justify-content:center; gap:24px; margin-bottom:32px; animation:march 1.5s steps(2) infinite; }
+    @keyframes march { 0%{transform:translateX(-4px)} 100%{transform:translateX(4px)} }
+    .invader { display:inline-block; font-size:22px; color:var(--accent); filter:drop-shadow(0 0 6px var(--accent)); animation:flicker 3s infinite; }
+    .invader:nth-child(2){color:var(--accent2);filter:drop-shadow(0 0 6px var(--accent2));animation-delay:.5s}
+    .invader:nth-child(3){color:var(--accent3);filter:drop-shadow(0 0 6px var(--accent3));animation-delay:1s}
+    .invader:nth-child(4){color:var(--accent); filter:drop-shadow(0 0 6px var(--accent)); animation-delay:1.5s}
+    .invader:nth-child(5){color:var(--accent2);filter:drop-shadow(0 0 6px var(--accent2));animation-delay:2s}
+    @keyframes flicker { 0%,95%,100%{opacity:1} 97%{opacity:.2} }
+
+    .name { font-family:var(--pixel); font-size:clamp(16px,3.5vw,28px); color:#fff; text-shadow:0 0 10px var(--accent),0 0 30px var(--accent); letter-spacing:2px; line-height:1.5; margin-bottom:12px; }
+    .title-tag { font-family:var(--pixel); font-size:9px; color:var(--accent2); text-shadow:0 0 8px var(--accent2); letter-spacing:3px; margin-bottom:10px; }
+    .subtitle { font-size:13px; color:var(--dim); margin-bottom:28px; letter-spacing:1px; }
+
+    .hero-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:28px; }
+    .btn { font-family:var(--pixel); font-size:8px; padding:10px 18px; border:1px solid; text-decoration:none; letter-spacing:1px; cursor:pointer; transition:all .2s; background:transparent; display:inline-block; }
+    .btn-primary  { color:var(--accent);  border-color:var(--accent);  }
+    .btn-primary:hover  { background:rgba(0,240,255,.12); color:#fff; }
+    .btn-secondary{ color:var(--accent2); border-color:var(--accent2); }
+    .btn-secondary:hover{ background:rgba(255,0,170,.12); color:#fff; }
+    .btn-ghost    { color:var(--accent3); border-color:var(--accent3); }
+    .btn-ghost:hover    { background:rgba(255,230,0,.12);  color:#fff; }
+
+    .contact-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; font-size:12px; color:var(--dim); }
+    .contact-bar a { color:var(--accent); text-decoration:none; border:1px solid transparent; padding:4px 8px; transition:all .2s; }
+    .contact-bar a:hover { border-color:var(--accent); background:rgba(0,240,255,.07); color:#fff; }
+    .contact-bar span { color:var(--dim); }
+
+
+    section { margin-bottom:48px; border:1px solid var(--border); padding:28px 32px; background:var(--panel); position:relative; animation:fadeUp .6s ease both; }
+    section:nth-child(2){animation-delay:.05s} section:nth-child(3){animation-delay:.1s}
+    section:nth-child(4){animation-delay:.15s} section:nth-child(5){animation-delay:.2s}
+    section:nth-child(6){animation-delay:.25s} section:nth-child(7){animation-delay:.3s}
+    section:nth-child(8){animation-delay:.35s} section:nth-child(9){animation-delay:.4s}
+    section:nth-child(10){animation-delay:.45s} section:nth-child(11){animation-delay:.5s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    section::before,section::after { content:'+'; font-family:var(--pixel); color:var(--accent); font-size:10px; position:absolute; top:-1px; }
+    section::before{left:-1px} section::after{right:-1px}
+
+    .sec-title { font-family:var(--pixel); font-size:11px; color:var(--accent3); text-shadow:0 0 8px var(--accent3); letter-spacing:3px; margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+    .sec-title::before { content:'▶'; color:var(--accent2); animation:blink .8s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .perfil-text { font-size:14px; line-height:1.9; color:var(--text); }
+
+
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; }
+    .skill-chip { border:1px solid; padding:8px 10px; font-size:12px; font-family:var(--mono); font-weight:700; letter-spacing:1px; text-align:center; transition:all .2s; position:relative; overflow:hidden; background:rgba(0,0,0,.4); }
+    .skill-chip::after { content:''; position:absolute; inset:0; background:currentColor; opacity:0; transition:opacity .2s; }
+    .skill-chip:hover::after { opacity:.08; }
+    .skill-chip .label { position:relative; z-index:1; }
+    .skill-chip .desc { font-size:9px; font-family:var(--mono); font-weight:400; opacity:.8; display:block; margin-top:4px; letter-spacing:0; line-height:1.4; position:relative; z-index:1; }
+    .t-js{color:var(--js);border-color:var(--js)} .t-sql{color:var(--sql);border-color:var(--sql)}
+    .t-gdscript{color:var(--gdscript);border-color:var(--gdscript)} .t-react{color:var(--react);border-color:var(--react)}
+    .t-nodejs{color:var(--nodejs);border-color:var(--nodejs)} .t-linux{color:var(--linux);border-color:var(--linux)}
+    .t-nginx{color:var(--nginx);border-color:var(--nginx)} .t-godot{color:var(--godot);border-color:var(--godot)}
+    .t-aws{color:var(--aws);border-color:var(--aws)} .t-git{color:var(--git);border-color:var(--git)}
+    .t-kotlin{color:var(--kotlin);border-color:var(--kotlin)} .t-android{color:var(--android);border-color:var(--android)}
+    .t-compose{color:var(--compose);border-color:var(--compose)} .t-room{color:var(--room);border-color:var(--room)}
+    .t-retrofit{color:var(--retrofit);border-color:var(--retrofit)} .t-hilt{color:var(--hilt);border-color:var(--hilt)}
+    .t-socketio{color:#fff;border-color:#555}
+
+
+    .exp-item { margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+    .exp-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .exp-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .exp-title { font-family:var(--pixel); font-size:9px; color:#fff; }
+    .exp-company { color:var(--accent); font-size:13px; margin-top:4px; }
+    .exp-period { font-family:var(--pixel); font-size:8px; color:var(--accent3); text-align:right; }
+    .exp-list { list-style:none; padding:0; margin-top:10px; }
+    .exp-list li { font-size:13px; color:var(--text); padding:3px 0; }
+    .exp-list li::before { content:'» '; color:var(--accent2); }
+
+    .project-card { border:1px solid var(--border); padding:20px 24px; margin-bottom:20px; background:rgba(0,0,0,.3); transition:border-color .3s; }
+    .project-card:hover { border-color:var(--accent); }
+    .project-card:last-child { margin-bottom:0; }
+    .proj-header { display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap; }
+    .proj-info { flex:1; min-width:200px; }
+    .proj-title { font-family:var(--pixel); font-size:10px; color:#fff; margin-bottom:6px; }
+    .proj-stack { font-size:11px; color:var(--accent2); margin-bottom:10px; font-family:var(--pixel); }
+    .proj-desc { font-size:13px; color:var(--text); line-height:1.7; margin-bottom:12px; }
+    .proj-logo { width:160px; height:110px; border:1px solid var(--border); background:#000; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; }
+    .proj-logo img { width:100%; height:100%; object-fit:cover; }
+    .proj-links { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .proj-link { font-family:var(--pixel); font-size:7px; padding:6px 10px; border:1px solid var(--accent); color:var(--accent); text-decoration:none; transition:all .2s; }
+    .proj-link:hover { background:rgba(0,240,255,.1); color:#fff; }
+    .proj-link.gh { border-color:var(--git); color:var(--git); }
+    .proj-link.gh:hover { background:rgba(240,80,50,.1); }
+
+    .github-box { display:flex; align-items:center; gap:24px; padding:20px; border:1px solid var(--git); background:rgba(240,80,50,.05); flex-wrap:wrap; }
+    .gh-icon { font-size:48px; filter:drop-shadow(0 0 8px var(--git)); flex-shrink:0; }
+    .gh-info { flex:1; }
+    .gh-username { font-family:var(--pixel); font-size:12px; color:var(--git); margin-bottom:8px; }
+    .gh-desc { font-size:13px; color:var(--text); margin-bottom:12px; }
+    .gh-repos { display:flex; gap:8px; flex-wrap:wrap; }
+    .gh-repo { font-size:11px; padding:4px 10px; border:1px solid var(--border); color:var(--dim); text-decoration:none; transition:all .2s; }
+    .gh-repo:hover { border-color:var(--git); color:var(--git); }
+
+
+    .blog-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+    .blog-card { border:1px solid var(--border); padding:20px; background:rgba(0,0,0,.3); transition:border-color .3s; }
+    .blog-card:hover { border-color:var(--aws); }
+    .blog-tag { font-family:var(--pixel); font-size:7px; color:var(--aws); margin-bottom:10px; letter-spacing:1px; }
+    .blog-title { font-family:var(--pixel); font-size:9px; color:#fff; margin-bottom:10px; line-height:1.6; }
+    .blog-body { font-size:12px; color:var(--text); line-height:1.8; }
+    .blog-body code { color:var(--accent); font-family:var(--mono); background:rgba(0,240,255,.08); padding:1px 4px; }
+    .blog-steps { list-style:none; margin-top:10px; }
+    .blog-steps li { font-size:12px; color:var(--dim); padding:3px 0; }
+    .blog-steps li::before { content:'$ '; color:var(--accent3); font-family:var(--mono); }
+
+
+    .edu-item { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+    .edu-title { font-family:var(--pixel); font-size:10px; color:#fff; margin-bottom:6px; }
+    .edu-inst  { color:var(--accent); font-size:13px; }
+    .edu-year  { font-family:var(--pixel); font-size:9px; color:var(--accent3); text-align:right; }
+    .edu-desc  { font-size:13px; color:var(--dim); margin-top:8px; }
+
+
+    .lang-row { display:flex; align-items:center; gap:16px; margin-bottom:12px; }
+    .lang-name { font-family:var(--pixel); font-size:9px; color:#fff; width:100px; }
+    .lang-bar { flex:1; height:12px; background:#111; border:1px solid var(--border); position:relative; overflow:hidden; }
+    .lang-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); animation:fillBar 1.5s ease both; }
+    @keyframes fillBar { from{width:0!important} }
+    .lang-level { font-size:11px; color:var(--dim); width:180px; }
+
+
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .contact-info { display:flex; flex-direction:column; gap:12px; }
+    .contact-link { display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; font-size:13px; padding:8px; border:1px solid transparent; transition:all .2s; }
+    .contact-link:hover { border-color:var(--accent); color:var(--accent); background:rgba(0,240,255,.05); }
+    .contact-link .icon { font-size:18px; width:24px; text-align:center; }
+    .contact-form { display:flex; flex-direction:column; gap:10px; }
+    .form-field { background:rgba(0,0,0,.4); border:1px solid var(--border); color:var(--text); font-family:var(--mono); font-size:13px; padding:10px 12px; outline:none; transition:border-color .2s; width:100%; }
+    .form-field:focus { border-color:var(--accent); }
+    .form-field::placeholder { color:var(--dim); }
+    textarea.form-field { resize:vertical; min-height:100px; }
+    .form-btn { font-family:var(--pixel); font-size:8px; padding:12px; border:1px solid var(--accent2); color:var(--accent2); background:transparent; cursor:pointer; letter-spacing:2px; transition:all .2s; }
+    .form-btn:hover { background:rgba(255,0,170,.12); color:#fff; }
+    .form-note { font-size:10px; color:var(--dim); text-align:center; margin-top:4px; }
+
+    footer { text-align:center; font-family:var(--pixel); font-size:8px; color:var(--dim); padding:20px; letter-spacing:2px; position:relative; z-index:1; }
+    footer::before { content:'— INSERT COIN TO HIRE —'; display:block; color:var(--accent2); font-size:9px; margin-bottom:10px; animation:blink 1.2s step-end infinite; text-shadow:0 0 8px var(--accent2); }
+    ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--accent)}
+
+    @media(max-width:600px){
+      section{padding:20px 16px}
+      .proj-header{flex-direction:column}
+      .proj-logo{width:100%;height:80px}
+      .edu-item,.contact-grid{flex-direction:column;grid-template-columns:1fr}
+      .edu-year{text-align:left}
+      .hero-btns{flex-direction:column;align-items:center}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hud">
+    <span>PLAYER: <span class="hud-score">GAEL_A</span></span>
+    <span>SCORE: <span class="hud-score">999999</span></span>
+    <span>LIVES: ❤ ❤ ❤</span>
+  </div>
+
+  <header>
+    <div class="invader-row">
+      <span class="invader">👾</span><span class="invader">🛸</span>
+      <span class="invader">👾</span><span class="invader">🛸</span>
+      <span class="invader">👾</span>
+    </div>
+    <div class="name">GAEL ANDRE<br>HUEYTLELT VILLALOBOS</div>
+    <div class="title-tag">// Ingeniero en Software //</div>
+    <div class="subtitle">Desarrollo Web · Android · Videojuegos · Cloud</div>
+    <div class="hero-btns">
+      <a class="btn btn-primary"   href="#proyectos">▶ VER PROYECTOS</a>
+      <a class="btn btn-secondary" href="CVinfo.pdf" download>⬇ DESCARGAR CV</a>
+      <a class="btn btn-ghost"     href="#contacto">✉ CONTACTO</a>
+    </div>
+    <div class="contact-bar">
+      <span>📍 Tuxtla Gutiérrez, Chiapas</span>
+      <a href="tel:+529612001840">📞 +52 961 200 1840</a>
+      <a href="mailto:gaelandrehueytlelt@gmail.com">✉ gaelandrehueytlelt@gmail.com</a>
+      <a href="https://github.com/OldROOx" target="_blank">⌥ github.com/OldROOx</a>
+      <a href="https://linkedin.com/in/gael-andre-hueytlelt-villalobos" target="_blank">⊞ LinkedIn</a>
+    </div>
+  </header>
+
+
+  <section>
+    <div class="sec-title">PERFIL PROFESIONAL</div>
+    <p class="perfil-text">
+      Ingeniero en Software con fuerte interés en el desarrollo de software, aplicaciones web,
+      móviles y videojuegos. Destaco por mi capacidad de aprendizaje autónomo, resolución de
+      problemas y entusiasmo por experimentar con nuevas tecnologías. Trabajo en proyectos
+      personales que integran desarrollo web con React, aplicaciones Android con Kotlin y
+      videojuegos en Godot, además de poseer habilidades en servidores Linux y despliegue
+      en la nube con AWS. He participado en estancias reales desarrollando APIs para
+      instituciones como la UPChiapas y el IMSS. Busco integrarme a un equipo profesional
+      donde pueda aportar mis conocimientos técnicos y continuar mi crecimiento en ingeniería de software.
+    </p>
+  </section>
+
+
+  <section>
+    <div class="sec-title">HABILIDADES TÉCNICAS</div>
+    <div class="skills-grid">
+      <div class="skill-chip t-js"><span class="label">JavaScript</span><span class="desc">ES6+ · navegador y servidor</span></div>
+      <div class="skill-chip t-sql"><span class="label">SQL</span><span class="desc">consultas, joins, diseño de BD</span></div>
+      <div class="skill-chip t-gdscript"><span class="label">GDScript</span><span class="desc">scripting nativo Godot Engine</span></div>
+      <div class="skill-chip t-kotlin"><span class="label">Kotlin</span><span class="desc">lenguaje oficial Android moderno</span></div>
+      <div class="skill-chip t-react"><span class="label">React</span><span class="desc">UI components, hooks, SPA</span></div>
+      <div class="skill-chip t-nodejs"><span class="label">Node.js</span><span class="desc">backend JS, REST APIs</span></div>
+      <div class="skill-chip t-compose"><span class="label">Jetpack Compose</span><span class="desc">UI declarativa para Android</span></div>
+      <div class="skill-chip t-android"><span class="label">Android Studio</span><span class="desc">IDE oficial desarrollo Android</span></div>
+      <div class="skill-chip t-room"><span class="label">Room</span><span class="desc">persistencia local SQLite Android</span></div>
+      <div class="skill-chip t-retrofit"><span class="label">Retrofit</span><span class="desc">cliente HTTP Android · REST</span></div>
+      <div class="skill-chip t-hilt"><span class="label">Hilt</span><span class="desc">inyección de dependencias Android</span></div>
+      <div class="skill-chip t-socketio"><span class="label">Socket.IO</span><span class="desc">comunicación en tiempo real</span></div>
+      <div class="skill-chip t-linux"><span class="label">Linux</span><span class="desc">administración servidores · bash</span></div>
+      <div class="skill-chip t-nginx"><span class="label">Nginx</span><span class="desc">web server · proxy inverso</span></div>
+      <div class="skill-chip t-aws"><span class="label">AWS EC2</span><span class="desc">despliegue en la nube</span></div>
+      <div class="skill-chip t-git"><span class="label">Git</span><span class="desc">control de versiones · GitHub</span></div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-title">EXPERIENCIA PROFESIONAL</div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">DESARROLLADOR DE SOFTWARE — ESTANCIA</div>
+          <div class="exp-company">Universidad Politécnica de Chiapas · Sistema CACEI</div>
+        </div>
+        <div class="exp-period">2024<br>3 MESES</div>
+      </div>
+      <ul class="exp-list">
+        <li>Desarrollo de 8 módulos de una API REST para el sistema de gestión de acreditación CACEI</li>
+        <li>Implementación de endpoints con <span style="color:var(--nodejs)">Node.js</span> y base de datos <span style="color:var(--sql)">SQL</span></li>
+        <li>Integración con el frontend institucional y pruebas funcionales de cada módulo</li>
+        <li>Trabajo bajo requerimientos reales de coordinadores académicos</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">DESARROLLADOR DE API — ESTANCIA</div>
+          <div class="exp-company">División IMSS · Suchiapa, Chiapas</div>
+        </div>
+        <div class="exp-period">2024<br>3 MESES</div>
+      </div>
+      <ul class="exp-list">
+        <li>Desarrollo de API REST para gestión de registros institucionales (familias, mascotas, datos clínicos)</li>
+        <li>Diseño de estructura de base de datos y definición de endpoints CRUD</li>
+        <li>Implementación de validaciones de datos y documentación técnica</li>
+        <li>Entrega funcional al equipo interno de la institución</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section id="proyectos">
+    <div class="sec-title">PROYECTOS DESTACADOS</div>
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-info">
+          <div class="proj-title">SHOOTER 3D — GODOT ENGINE</div>
+          <div class="proj-stack" style="color:var(--godot)">[ Godot Engine · GDScript ]</div>
+          <div class="proj-desc">
+            Videojuego tipo shooter en 3D con <span style="color:var(--godot);font-weight:700">Godot Engine</span>
+            y <span style="color:var(--gdscript);font-weight:700">GDScript</span>.
+            Mecánicas de movimiento, disparo, colisiones y puntuación.
+            Organización modular de escenas para escalar el proyecto.
+          </div>
+          <div class="proj-links">
+            <span style="font-size:11px;color:var(--dim)">Rol: Desarrollador único · Proyecto personal · 2025</span>
+          </div>
+        </div>
+        <div class="proj-logo">
+          <img src="capturaONG.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-info">
+          <div class="proj-title">SUBASTAS MX — APP ANDROID</div>
+          <div class="proj-stack" style="color:var(--kotlin)">[ Kotlin · Jetpack Compose · Hilt · Room · Retrofit · Socket.IO ]</div>
+          <div class="proj-desc">
+            App de subastas en tiempo real para <span style="color:var(--android);font-weight:700">Android</span>
+            con <span style="color:var(--kotlin);font-weight:700">Kotlin</span> y
+            <span style="color:var(--compose);font-weight:700">Jetpack Compose</span>.
+            Arquitectura limpia con <span style="color:var(--hilt);font-weight:700">Hilt</span>,
+            persistencia con <span style="color:var(--room);font-weight:700">Room</span>,
+            API REST con <span style="color:var(--retrofit);font-weight:700">Retrofit</span>
+            y pujas en tiempo real vía <span style="color:var(--socketio);font-weight:700">Socket.IO</span>.
+            UI Material Design 3 con actualizaciones optimistas de precio.
+          </div>
+          <div class="proj-links">
+            <a class="proj-link gh" href="https://github.com/OldROOx/subastas-en-tiempo-real" target="_blank">⌥ Ver en GitHub</a>
+            <span style="font-size:11px;color:var(--dim)">Rol: Desarrollador principal · 2025</span>
+          </div>
+        </div>
+        <div class="proj-logo">
+          <img src="suabstasCap.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-info">
+          <div class="proj-title">APLICACIONES WEB ESTÁTICAS</div>
+          <div class="proj-stack" style="color:var(--react)">[ React · Nginx · Linux · AWS EC2 ]</div>
+          <div class="proj-desc">
+            Páginas en <span style="color:var(--react);font-weight:700">React</span> desplegadas
+            en servidores <span style="color:var(--linux);font-weight:700">Linux</span>
+            con <span style="color:var(--nginx);font-weight:700">Nginx</span> como servidor web.
+            Configuración de entornos de producción en instancias
+            <span style="color:var(--aws);font-weight:700">AWS EC2</span>,
+            manejo de rutas y diseño responsivo.
+          </div>
+          <div class="proj-links">
+            <span style="font-size:11px;color:var(--dim)">Rol: Desarrollador único · 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-title">GITHUB & CÓDIGO ABIERTO</div>
+    <div class="github-box">
+      <div class="gh-icon">🐙</div>
+      <div class="gh-info">
+        <div class="gh-username">github.com/OldROOx</div>
+        <div class="gh-desc">
+          Repositorios con proyectos académicos y personales: aplicaciones Android,
+          APIs REST, videojuegos en Godot y herramientas web.
+        </div>
+        <div class="gh-repos">
+          <a class="gh-repo" href="https://github.com/OldROOx/subastas-en-tiempo-real" target="_blank">subastas-en-tiempo-real</a>
+          <a class="gh-repo" href="https://github.com/OldROOx" target="_blank">Ver todos los repos →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-title">BLOG TÉCNICO — AWS</div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-tag">▶ TUTORIAL 01 · AWS EC2</div>
+        <div class="blog-title">DESPLEGAR UNA APP NODE.JS EN AWS EC2</div>
+        <div class="blog-body">
+          Cómo lanzar una instancia <span style="color:var(--aws)">EC2</span> Ubuntu,
+          instalar <span style="color:var(--nodejs)">Node.js</span> y dejar
+          corriendo una API REST accesible desde internet.
+          <ul class="blog-steps">
+            <li>Crear instancia EC2 t2.micro (free tier)</li>
+            <li>Conectarse vía SSH con archivo <code>.pem</code></li>
+            <li>sudo apt install nodejs npm</li>
+            <li>node server.js &amp; (background)</li>
+            <li>Abrir puerto 3000 en Security Group</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-tag">▶ TUTORIAL 02 · NGINX</div>
+        <div class="blog-title">NGINX COMO PROXY INVERSO EN EC2</div>
+        <div class="blog-body">
+          Configura <span style="color:var(--nginx)">Nginx</span> para redirigir
+          tráfico del puerto 80 a tu app Node.js en 3000,
+          ocultando el puerto y preparando la ruta para HTTPS.
+          <ul class="blog-steps">
+            <li>sudo apt install nginx</li>
+            <li>Editar /etc/nginx/sites-available/default</li>
+            <li>proxy_pass http://localhost:3000</li>
+            <li>sudo systemctl restart nginx</li>
+            <li>Verificar con curl http://tu-ip-publica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-tag">▶ TUTORIAL 03 · LOAD BALANCER</div>
+        <div class="blog-title">BALANCEO DE CARGA CON NGINX EN AWS</div>
+        <div class="blog-body">
+          Configura <span style="color:var(--nginx)">Nginx</span> como balanceador
+          entre múltiples instancias <span style="color:var(--aws)">EC2</span>
+          para alta disponibilidad y tolerancia a fallos.
+          <ul class="blog-steps">
+            <li>Levantar 2+ instancias EC2 con la misma app</li>
+            <li>Configurar bloque upstream en Nginx</li>
+            <li>upstream backend { server IP1; server IP2; }</li>
+            <li>proxy_pass http://backend</li>
+            <li>Probar caída de un nodo sin perder servicio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-title">EDUCACIÓN</div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-title">INGENIERÍA EN SOFTWARE</div>
+        <div class="edu-inst">Universidad Politécnica de Chiapas</div>
+        <div class="edu-desc">
+          Enfoque en programación, bases de datos, estructuras de datos,<br>
+          desarrollo web, desarrollo móvil y fundamentos de sistemas operativos.<br>
+          <span style="color:var(--accent3)">Semestre:</span> 7mo cuatrimestre (en curso)
+        </div>
+      </div>
+      <div class="edu-year">2023<br>—<br>PRESENTE</div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-title">IDIOMAS</div>
+    <div class="lang-row">
+      <div class="lang-name">ESPAÑOL</div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      <div class="lang-level">Nativo</div>
+    </div>
+    <div class="lang-row">
+      <div class="lang-name">INGLÉS</div>
+      <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
+      <div class="lang-level">Intermedio-Básico<br><span style="font-size:10px;color:var(--dim)">documentación técnica · lectura</span></div>
+    </div>
+  </section>
+
+
+  <section id="contacto">
+    <div class="sec-title">CONTACTO</div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a class="contact-link" href="mailto:gaelandrehueytlelt@gmail.com"><span class="icon">✉</span> gaelandrehueytlelt@gmail.com</a>
+        <a class="contact-link" href="tel:+529612001840"><span class="icon">📞</span> +52 961 200 1840</a>
+        <a class="contact-link" href="https://github.com/OldROOx" target="_blank"><span class="icon">⌥</span> github.com/OldROOx</a>
+        <a class="contact-link" href="https://linkedin.com/in/gael-andre-hueytlelt-villalobos" target="_blank"><span class="icon">⊞</span> LinkedIn</a>
+        <a class="contact-link" href="CVinfo.pdf" download><span class="icon">⬇</span> Descargar CV (PDF)</a>
+      </div>
+      <div class="contact-form">
+        <input  class="form-field" type="text"  placeholder="Tu nombre" id="cf-name">
+        <input  class="form-field" type="email" placeholder="Tu correo" id="cf-email">
+        <textarea class="form-field" placeholder="Tu mensaje..." id="cf-msg"></textarea>
+        <button class="form-btn" onclick="
+          var n=document.getElementById('cf-name').value.trim(),
+              e=document.getElementById('cf-email').value.trim(),
+              m=document.getElementById('cf-msg').value.trim();
+          if(!n||!e||!m){alert('Completa todos los campos');return;}
+          window.location.href='mailto:gaelandrehueytlelt@gmail.com?subject=Contacto de '+encodeURIComponent(n)+'&body='+encodeURIComponent(m+'\n\n— '+n+' ('+e+')');
+        ">ENVIAR MENSAJE ▶</button>
+        <div class="form-note">Abre tu cliente de correo para enviar</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer>&copy; 2026 GAEL ANDRE HUEYTLELT VILLALOBOS</footer>
+</body>
+</html>
